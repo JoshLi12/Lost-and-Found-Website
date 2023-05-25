@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./main.css">
+    <!-- <link rel="icon" href="./public/website-logo.png" type="image/x-icon"> -->
+  </head>
+
+  <body>
+    
+    <header>
+        <div id="nav-bar">
+          <a href="/">
+            <div id="appleby-logo">
+              <img id="appleby-logo-white" src="./img/appleby-logo-whitet.png">
+            </div>
+          </a>
+        </div>
+    </header>
+    
+    <main id="main">
+        <h1>Upload Item</h1>
+        <form action="/upload" method="post">
+            <div>
+                <input type="text" name="idBox" id="id-box" placeholder="Item ID">
+            </div>
+            <div>
+                <input type="text" name="nameBox" id="name-box" placeholder="Name on item (n/a if none)">
+            </div>
+            <div>
+                <input type="text" name="tagsBox" id="tags-box" placeholder="Tags">
+            </div>
+            <div>
+                <input id="submit-information" type="submit" value="Upload">
+            </div>
+        </form>
+    </main>
+  </body>
+</html>

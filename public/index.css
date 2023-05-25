@@ -22,7 +22,7 @@
     vertical-align: auto;
 }
 #login {
-    margin-left: 85vw;
+    margin-left: 2vw;
 }
 #login-text {
     color: white;
@@ -129,4 +129,9 @@
 }
 .itemCardDetails {
     font-size: 17px;
+}
+#add-object-icon {
+    color: white;
+    font-size: 45px;
+    margin-left: 81vw;
 }
