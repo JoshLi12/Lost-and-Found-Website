@@ -1,6 +1,5 @@
-
-
 // TODO: store this data in a cloud database
+/*
 let data = [
     {
         "id": 1234,
@@ -25,8 +24,50 @@ let data = [
         "name": "n/a",
         "date": "Dec 6, 2023",
         "tags": ['blue', 'red', 'yellow']
+    },
+    {
+        "id": 1236,
+        "name": "n/a",
+        "date": "Dec 6, 2023",
+        "tags": ['blue', 'red', 'yellow']
+    },
+    {
+        "id": 1236,
+        "name": "n/a",
+        "date": "Dec 6, 2023",
+        "tags": ['blue', 'red', 'yellow']
+    },
+    {
+        "id": 1236,
+        "name": "n/a",
+        "date": "Dec 6, 2023",
+        "tags": ['blue', 'red', 'yellow']
+    },
+    {
+        "id": 1236,
+        "name": "n/a",
+        "date": "Dec 6, 2023",
+        "tags": ['blue', 'red', 'yellow']
+    },
+    {
+        "id": 1236,
+        "name": "n/a",
+        "date": "Dec 6, 2023",
+        "tags": ['blue', 'red', 'yellow']
+    },
+    {
+        "id": 1236,
+        "name": "n/a",
+        "date": "Dec 6, 2023",
+        "tags": ['blue', 'red', 'yellow']
+    },
+    {
+        "id": 1236,
+        "name": "n/a",
+        "date": "Dec 6, 2023",
+        "tags": ['blue', 'red', 'yellow']
     }
-]
+]/*
 
 /* 
    {
@@ -101,15 +142,14 @@ curl --request POST \
 
 // Process a list of items and render an item card for each one
 function processItemCards(listOfItems) {
-    let cardsSection = ""
-    for (let itemInfo of listOfItems) {
-        cardsSection += generateItemCard(itemInfo);  // returns HTML in string format
+    let cardsSection = "";
+    for (let i=listOfItems.length-1; i>=0; i--) {
+        cardsSection += generateItemCard(listOfItems[i]);  // returns HTML in string format
     }
 
     let container = document.getElementById("allItemCards");
-    container.innerHTML = cardsSection;
+    container.innerHTML = cardsSection;  
 }
-processItemCards(data);
 
 // Generate a single item card
 function generateItemCard(itemCardInfo) {
@@ -117,15 +157,24 @@ function generateItemCard(itemCardInfo) {
     let id = itemCardInfo["id"];
     let date = itemCardInfo["date"];
     let name = itemCardInfo["name"];
-    let tags = itemCardInfo["tags"].join(', ')
+    let image = itemCardInfo["image"];
+    // let tags = itemCardInfo["tags"];  // array-like object 
+
+    // let data = ["a", "b", "c"]
+
+    // data = {
+    //     "0": "a",
+    //     "1": "b"
+    // }
 
     return `
-        <div class="itemCard">
-            <div class="itemCardDetails">
-                <div>ID: ${id}</div>
-                <div>Date added: ${date}</div>
-                <div>Owner name: ${name}</div>
-                <div>Tags: ${tags}</div>
+        <div class="itemCard" id="${id}" style="background-image: url(${image})">
+            <div class="itemCardBackgroundColor">
+                <div class="itemCardDetails">
+                    <div class="itemCardDetailsText">ID: ${id}</div>
+                    <div class="itemCardDetailsText">Date added: ${date}</div>
+                    <div class="itemCardDetailsText">Owner name: ${name}</div>
+                </div>
             </div>
         </div>
     `
@@ -150,8 +199,14 @@ function toggleLogIn() {
 function submitPassword() {
     let password = "password";
     let userPassword = document.getElementById("enter-password").value;
+    
+    // Server side example: Check if login is valid
+    // api.post('/login', password);
+
+    // Client side example
     if (userPassword == password) {
         console.log("password correct");
+        //renderAdminButtons();
     } else {
         console.log("password incorrect");
     }

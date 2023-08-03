@@ -26,7 +26,7 @@
     
     <main id="main">
         <h1>Upload Item</h1>
-        <form action="/upload" method="post">
+        <form action="/upload" method="post" enctype="multipart/form-data">
             <div>
                 <input type="text" name="idBox" id="id-box" placeholder="Item ID">
             </div>
@@ -35,6 +35,9 @@
             </div>
             <div>
                 <input type="text" name="tagsBox" id="tags-box" placeholder="Tags">
+            </div>
+            <div>
+                <input type="file" name="image" id="image">
             </div>
             <div>
                 <input id="submit-information" type="submit" value="Upload">

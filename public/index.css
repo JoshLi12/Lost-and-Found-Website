@@ -11,6 +11,7 @@
     position: fixed;
     display: flex;
     align-items: center; 
+    z-index: 100;
     /* justify-content:  */
 }
 
@@ -47,54 +48,9 @@
     -ms-user-select: none;
 }
 #pop-up-login {
-    background-color: white;
-    border-color: #0F4179;
-    border-style: solid;
-    /* border-top-style: none; */
-    width: 90vw;
-    max-width: 400px;
-    height: 24vh;
-    border-width: 2.3px;
-    float: right;
-    display: none;
-    border-radius: 13px;
-    margin-top: 2px;
-    /* border-bottom-left-radius: 13px; */
-    /* border-bottom-right-radius: 13px; */
-}
-#pop-up-title {
-    font-size: 27px;
-    color: #0F4179;
-    margin: 2vh;
-    font-weight: 600;
-}
-#pop-up-title-break {
-    width: 100%;
-    height: 1px;
-    background-color: #0F4179;
-    border-style: none;
-}
-#password-section {
-    margin: 0px auto;
-    width: 90%;
-    /* border-style: solid; */
-    border-color: green;
-    border-width: 2px;
 
 }
-#password-title {
-    color: #0F4179;
-    font-size: 22px;
-}
-#enter-password {
-    width: 70%;
-    font-size: 17px;
-    padding: 3.5 px;
-    border-color: #0F4179;
-    border-radius: 3.3px;
-    border-width: 1.3px;
-    margin-top: 5%;
-}
+
 #submit-password-button {
     background-color: #0F4179;
     width: 13vw;
@@ -122,16 +78,80 @@
     width: 14vw;
     height: 14vw;
     border-radius: 9px;
-    background-color: yellow;
-    border-width: 2px;
-    border-color: black;
-    border-style: solid;
+    background-image: url("./img/shorthair.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 2.8vw;
 }
+
+.itemCard:hover .itemCardBackgroundColor{
+    opacity: 0.83;
+    transition: 0.3s ease;
+}
+.itemCard:hover .itemCardDetails {
+    opacity: 1;
+    transition: 0.3s ease;
+}
+
 .itemCardDetails {
-    font-size: 17px;
+    border-radius: 9px;
+    font-size: 6px + 1.3vh;
+    color: white;
+    opacity: 0;
 }
+
+.itemCardBackgroundColor {
+    width: 100%;
+    height: 100%;
+    background-color: #0F4179;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 9px;
+}
+
+.itemCardDetailsText {
+    padding: 6px;
+    margin-left: 1vw;
+}
+
+
 #add-object-icon {
     color: white;
     font-size: 45px;
     margin-left: 81vw;
+}
+
+#allItemCards {
+    display: flex;
+    /* border: solid;
+    border-color: red;
+    border-width: 2px; */
+    flex-wrap: wrap;
+}
+
+#newItemsPage {
+    display: flex;
+    /* border: solid;
+    border-color: green;
+    border-width: 2px; */
+}
+
+/* Phone only */
+@media screen and (max-width: 480px) {
+    .itemCardDetails {
+       font-size: 10px;
+    }
+
+    .itemCardDetailsText {
+        padding: 3px;
+    }
+    .itemCard {
+        width: 37vw;
+        height: 37vw;
+        margin: 6.5vw;
+    }
+
+    
 }

@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="icon" href="./public/website-logo.png" type="image/x-icon"> -->
   </head>
-  
 
   <body id="home-page">
     <header>
@@ -36,35 +35,37 @@
     </header>
     
     <main id="main">
+
       <div id="pop-up-login">
-          <div id="pop-up-title">
-            Login
-          </div>
-          <hr id="pop-up-title-break">
-          <div id="password-section">
-            <label id="password-title">
-              Password: 
-            </label>
-            <input id="enter-password" placeholder="Enter password...">
-          </div>
-          <div id="submit-password-button">
-            <a onclick="submitPassword()">Enter</a>
-          </div>
+          <form action="/login" method="post">
+            <div id="pop-up-title">Login</div>
+            <hr id="pop-up-title-break">
+            <div id="password-section">
+              <label id="password-title">Password: </label>
+              <input id="enter-password" name="enterPassword" placeholder="Enter password...">
+            </div>
+            
+            <div id="submit-password-button">
+              <input type="submit" value="Log in"></input>
+            </div>
+          </form>
       </div>
       
       <div id="newItemsPage">
-        <div id="allItemCards">
-        </div>
+        <div id="allItemCards"></div>
       </div>
-      
-      <div id="claimedItemsPage">
-        
-      </div>
+
     </main>
     <footer>
 
     </footer>
-
     <script src="script.js"></script>
+
+    <script>
+      let data = <%- JSON.stringify(data) %>;  // get data from server
+      console.log(data);
+      
+      processItemCards(data.documents);  // call client-side javascript function to generate item cards
+    </script>
   </body>
 </html>
