@@ -151,21 +151,23 @@ function processItemCards(listOfItems) {
     container.innerHTML = cardsSection;  
 }
 
+// Process a list of items and render an item card for each one
+function processItemCardsAdmin(listOfItems) {
+    let cardsSection = "";
+    for (let i=listOfItems.length-1; i>=0; i--) {
+        cardsSection += generateItemCardAdmin(listOfItems[i]);  // returns HTML in string format
+    }
+
+    let container = document.getElementById("allItemCards");
+    container.innerHTML = cardsSection;  
+}
+
 // Generate a single item card
 function generateItemCard(itemCardInfo) {
-    // Goal: return a string that looks exactly like HTML
     let id = itemCardInfo["id"];
     let date = itemCardInfo["date"];
     let name = itemCardInfo["name"];
     let image = itemCardInfo["image"];
-    // let tags = itemCardInfo["tags"];  // array-like object 
-
-    // let data = ["a", "b", "c"]
-
-    // data = {
-    //     "0": "a",
-    //     "1": "b"
-    // }
 
     return `
         <div class="itemCard" id="${id}" style="background-image: url(${image})">
@@ -180,6 +182,33 @@ function generateItemCard(itemCardInfo) {
     `
 }
 
+// Generate a single item card
+function generateItemCardAdmin(itemCardInfo) {
+    let id = itemCardInfo["id"];
+    let date = itemCardInfo["date"];
+    let name = itemCardInfo["name"];
+    let image = itemCardInfo["image"];
+
+    return `
+        <div class="itemCard" id="${id}" style="background-image: url(${image})" onclick="claim(${id}))">
+            <div class="itemCardBackgroundColor">
+                <div class="itemCardDetails" id="itemCardDetails${id}">
+                    <div class="itemCardDetailsText">ID: ${id}</div>
+                    <div class="itemCardDetailsText">Date added: ${date}</div>
+                    <div class="itemCardDetailsText">Owner name: ${name}</div>
+                </div>
+                
+                <div class="claimButton" id="claimButton${id}">Claim</div>
+            </div>
+        </div>
+    `
+}
+
+function claim(id) {
+    console.log("Clicked,", id);
+    document.getElementById("claimButton" + id).style.display = "block";
+    document.getElementById("itemCardDetails" + id).style.display = "none";
+}
 
 // if (item["tags"]["blue"])
 var loginState = false;
@@ -188,26 +217,31 @@ function toggleLogIn() {
     loginState = !loginState;
     console.log(loginState);
     if (loginState === true) {
-        document.getElementById("pop-up-login").style.display = "block";
-    }
-    else {
-        document.getElementById("pop-up-login").style.display = "none";
+        document.getElementById("pop-up-login").style.display = "inline";
+        document.getElementById("login").style.display = "none";
     }
 }
 
+// Prevent page refresh when clicking submit
+// document.getElementById("loginForm").addEventListener("submit", function(event){
+//     event.preventDefault()
+// });
 
 function submitPassword() {
-    let password = "password";
+    // let password = "password";
     let userPassword = document.getElementById("enter-password").value;
     
     // Server side example: Check if login is valid
-    // api.post('/login', password);
+    api.post('/login', password);
 
     // Client side example
-    if (userPassword == password) {
-        console.log("password correct");
-        //renderAdminButtons();
-    } else {
-        console.log("password incorrect");
-    }
+    // if (loggedIn) {
+    //     console.log("password correct");
+    //     document.getElementById("login").style.display = "none";
+    //     document.getElementById("logout").style.display = "block";
+
+    //     //renderAdminButtons();
+    // } else {
+    //     console.log("password incorrect");
+    // }
 }

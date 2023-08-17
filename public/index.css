@@ -9,34 +9,51 @@
     background-color: #004270;
     top: 0;
     position: fixed;
-    display: flex;
-    align-items: center; 
-    z-index: 100;
-    /* justify-content:  */
+    z-index: 2;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* display: flex;
+    flex-direction: row;
+    align-items: center; */
 }
-
+#nav-bar-admin {
+    width: 100%;
+    height: 12vh;
+    background-color: #004270;
+    top: 0;
+    position: fixed;
+    z-index: 2;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 #appleby-logo-white {
     width: 6.5vw;
     height: auto;
 }
-#appleby-logo {
-    vertical-align: auto;
+.nav-bar-buttons {
+    margin-left: 1.5vw;
+    float: right;
+    display: inline;
+    margin-right: 4vw;
+}
+.claimButton {
+    border-style: solid;
+    border-color: white;
+    border-width: 3px;
+    color: white;
+    display: none;
 }
 #login {
-    margin-left: 2vw;
-}
-#login-text {
-    color: white;
-}
-#password-login {
-    height: 4vh;
-    width: 10vw;
-    border-radius: 5px;
-    padding: 3px;
-    box-sizing: border-box;
-}
-#main {
-    margin-top: 12vh;
+    /* position: relative; */
+    margin-left: 1.5vw;
+    float: right;
+    display: inline;
+    margin-right: 4vw;
+    /* margin-top: -6vh; */
 }
 #login-button {
     color: white;
@@ -47,33 +64,73 @@
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-#pop-up-login {
 
+#logout {
+    display: inline;
+    margin-left: 1.5vw;
+    float: right;
+    margin-right: 4vw;
 }
-
-#submit-password-button {
-    background-color: #0F4179;
-    width: 13vw;
-    display: flex;
+#customAlert {
+    display: none;
+    position: "absolute";
+    top: 0;
+    border-style: solid;
+    border-color: blue;
+    border-width: 3px;
+    background-color: red;
+    width: 20vw;
+    height: 10vh;
+}
+#logout-button {
     color: white;
-    border: 3px solid #0F4179;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
-    font-size: 19px;
-    border-radius: 20px;
-    margin: 0px auto;
-    margin-top: 3vh;
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 22px;
     cursor: pointer;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-#submit-password-button:hover {
-    background-color: white;
-    color: #0F4179;
+
+#pop-up-login {
+    display: none;
+    float: right;
+    margin-left: 1.5vw;
+    margin-right: 1vw;
+    /* margin-top: -6vh; */
+
 }
+
+#add-object-icon {
+    font-size: 45px;
+    float: right;
+    display: inline;
+    margin-top: -1vh;
+
+}
+#nav-bar-right {
+    position: relative;
+    bottom: 6vh;
+    border-color: red;
+    border-style: solid;
+}
+
+#add-object-icon a {
+    color: white;
+}
+
+#main {
+    margin-top: 12vh;
+}
+#enter-password-box {
+    border-color: black;
+    border-width: 2px;
+    border-radius: 3px;
+    padding: 1px;
+}
+
 .itemCard {
     width: 14vw;
     height: 14vw;
@@ -114,13 +171,6 @@
 .itemCardDetailsText {
     padding: 6px;
     margin-left: 1vw;
-}
-
-
-#add-object-icon {
-    color: white;
-    font-size: 45px;
-    margin-left: 81vw;
 }
 
 #allItemCards {

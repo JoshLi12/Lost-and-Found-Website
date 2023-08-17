@@ -38,6 +38,8 @@ import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 import axios from 'axios';
+import session from 'express-session';
+import passport from 'passport';
 import { firebaseApp } from './firebase.js';
 import { getStorage, ref, getDownloadURL, listAll, uploadBytes } from "firebase/storage";
 
@@ -56,9 +58,18 @@ const upload = multer({ dest: './public/uploads/' });
 const app = express();
 const port = 3000;
 
+
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.engine('html', ejs.renderFile);  // app.set('view engine', 'ejs');
 
@@ -71,15 +82,15 @@ const payload = {
 //    'Accept': 'application/json',
 
 const config = {
-                    "method": "POST",
-                    "mode": "no-cors", 
-                    "cache": "no-cache",
-                    "headers": {
-                        "apiKey": "1t2ojJgJtxKAeQ2eAReH81GKV6iejlKUkMPxNQEMhyaeLP3FnOX5PGomIcndciad",
-                        "Content-Type": "application/ejson",
-                    },
-                    "body": JSON.stringify(payload)
-                }
+                "method": "POST",
+                "mode": "no-cors", 
+                "cache": "no-cache",
+                "headers": {
+                    "apiKey": "1t2ojJgJtxKAeQ2eAReH81GKV6iejlKUkMPxNQEMhyaeLP3FnOX5PGomIcndciad",
+                    "Content-Type": "application/ejson",
+                },
+                "body": JSON.stringify(payload)
+              }
 
 
 var monthConversion = new Map([
@@ -103,6 +114,33 @@ var day = date.getDate();
 var year = date.getFullYear();
 var todayDate = monthConversion.get(month+1) + " " + day + ", " + year;
 
+function ensureAuthenticated(req, res, next) {
+  if (req.session.user) {
+    console.log("User authenticated");
+    return next(); // User is authenticated, proceed to the next middleware/route handler
+  } else {
+    console.log("User was not authenticated");
+    res.redirect('/'); // Redirect to where we can login
+  }
+}
+
+app.get('/admin', ensureAuthenticated, async (req, res) => {
+  // let message = req.session.data.message ? req.session.data.message : '';  // return empty string if undefined
+  let data = await getAllItems();
+  let images = await getImages();
+
+  // optional: check for images
+  if (images === undefined) { 
+    // error occurred in getImages()
+  }
+
+  // console.log(images);
+  for (let x of data.documents) {
+    x["image"] = images[x.id];
+  }
+
+  res.render(__dirname + '/public/admin.html', { data: data });
+});
 
 async function getAllItems() {
   try {
@@ -118,18 +156,22 @@ async function getAllItems() {
 const correctPassword = "password";
 app.post('/login', (req, res) => {
   console.log(req.body);
+  req.session.message = "";
   if (req.body.enterPassword === correctPassword) {
-    console.log("success");
-    res.redirect('/');  // TODO: redirect to admin page
+    req.session.user = "Admin";
+    res.redirect('/admin');  // TODO: redirect to admin page
   } else {
-    console.log("error");
-    // req.session.data = { 'message': 'Invalid Login'};
+    req.session.message = "Invalid Login";
     res.redirect('/');  // redirect to home
   }
 })
 
-// send or upload data to be processed
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/logout', (req, res) => {
+  req.session.user = null;
+  res.redirect('/');
+})
+
+app.post('/upload', ensureAuthenticated, upload.single('image'), (req, res) => {
 
   // req:
   // file: {
@@ -186,30 +228,35 @@ app.post('/upload', upload.single('image'), (req, res) => {
     });  
 });
 
-app.get('/upload', async function(req, res) {
+app.get('/upload', ensureAuthenticated, async function(req, res) {
   // Execute any JS code that we want 
   res.sendFile(path.join(__dirname + '/public', '/upload.html'));
 });
 
 // Home page
 app.get('/', async function(req, res) {
-    // let message = req.session.data.message ? req.session.data.message : '';  // return empty string if undefined
-    let data = await getAllItems();
-    let images = await getImages();
+  if (req.session.user) {
+    res.redirect('/admin');
+    return;
+  } 
 
-    // optional: check for images
-    if (images === undefined) { 
-      // error occurred in getImages()
-    }
+  // let message = req.session.data.message ? req.session.data.message : '';  // return empty string if undefined
+  let data = await getAllItems();
+  let images = await getImages();
 
-    // console.log(images);
-    for (let x of data.documents) {
-      x["image"] = images[x.id];
-    }    
+  // optional: check for images
+  if (images === undefined) { 
+    // error occurred in getImages()
+  }
 
-    // Render template
-    res.render(__dirname + '/public/home.html', { data: data })
-    // res.sendFile(path.join(__dirname + '/public', '/home.html'));
+  // console.log(images);
+  for (let x of data.documents) {
+    x["image"] = images[x.id];
+  }    
+
+  // Render template
+  res.render(__dirname + '/public/home.html', { data: data, message: req.session.message })
+  // res.sendFile(path.join(__dirname + '/public', '/home.html'));
 });
 
 app.listen(port, () => {

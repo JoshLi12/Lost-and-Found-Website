@@ -14,34 +14,32 @@
 
   <body id="home-page">
     <header>
-      <ul id="nav-bar">
+      <ul id="nav-bar-admin">
         <li>
-          <a href="/">
+          <a href="/admin">
             <img id="appleby-logo-white" src="./img/appleby-logo-whitet.png">
           </a>
         </li>
         
         <li id="nav-bar-right">
-          <div id="login">
-            <a id="login-button" onclick="toggleLogIn()">Log In</a>
-          </div>
-
-          <div id="pop-up-login">
-            <form id="loginForm" action="/login" method="post" >
-              <input id="enter-password-box" name="enterPassword" placeholder="Enter password...">
-              <input id="enter-password-button" type="submit" value="Log in"></input>
+          <div id="logout">
+            <form action="/logout" method="post" >
+              <input id="logout-button" type="submit" value="Log out"></input>
             </form>
           </div>
+  
+          <div id="add-object-icon">
+            <a href="upload">
+              <i class="fa fa-plus-square-o"></i>
+            </a>
+          </div>
         </li>
-        <div id="customAlert">
-          <%= message %>
-        </div>
+        
       </ul>
-
-      
     </header>
     
     <main id="main">
+      
       <div id="newItemsPage">
         <div id="allItemCards"></div>
       </div>
@@ -53,15 +51,9 @@
     <script src="script.js"></script>
 
     <script>
-      let m = '<%= message %>';
-      if (m) {
-        document.getElementById("customAlert").style.display = "block";
-      }
-      // console.log(m);
-      // alert(m);
-
       let data = <%- JSON.stringify(data) %>;  // get data from server
-      processItemCards(data.documents);  // call client-side javascript function to generate item cards
+      
+      processItemCardsAdmin(data.documents);  // call client-side javascript function to generate item cards
     </script>
   </body>
 </html>
