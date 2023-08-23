@@ -194,8 +194,8 @@ function generateItemCardAdmin(itemCardInfo) {
             <div id="itemCardBackground" class="itemCardBackgroundColor" onmouseleave="resetInfo(${id})" onclick="claim(${id})">
                 <div class="itemCardDetails" id="itemCardDetails${id}">
                     <div class="itemCardDetailsText">ID: ${id}</div>
-                    <div class="itemCardDetailsText">Date added: ${date}</div>
-                    <div class="itemCardDetailsText">Owner name: ${name}</div>
+                    <div class="itemCardDetailsText">Date Added: ${date}</div>
+                    <div class="itemCardDetailsText">Owner Name: ${name}</div>
                 </div>
                 
                 <p class="claimButton" id="claimButton${id}" onclick="removeInfo(${id})>Claim</p>
