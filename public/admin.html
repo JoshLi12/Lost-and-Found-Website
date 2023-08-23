@@ -51,9 +51,15 @@
     <script src="script.js"></script>
 
     <script>
-      let data = <%- JSON.stringify(data) %>;  // get data from server
-      
-      processItemCardsAdmin(data.documents);  // call client-side javascript function to generate item cards
+      fetch('/getData')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          processItemCardsAdmin(data.documents)
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     </script>
   </body>
 </html>

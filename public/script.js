@@ -190,24 +190,46 @@ function generateItemCardAdmin(itemCardInfo) {
     let image = itemCardInfo["image"];
 
     return `
-        <div class="itemCard" id="${id}" style="background-image: url(${image})" onclick="claim(${id}))">
-            <div class="itemCardBackgroundColor">
+        <div class="itemCard" id="${id}" style="background-image: url(${image})">
+            <div id="itemCardBackground" class="itemCardBackgroundColor" onmouseleave="resetInfo(${id})" onclick="claim(${id})">
                 <div class="itemCardDetails" id="itemCardDetails${id}">
                     <div class="itemCardDetailsText">ID: ${id}</div>
                     <div class="itemCardDetailsText">Date added: ${date}</div>
                     <div class="itemCardDetailsText">Owner name: ${name}</div>
                 </div>
                 
-                <div class="claimButton" id="claimButton${id}">Claim</div>
+                <p class="claimButton" id="claimButton${id}" onclick="removeInfo(${id})>Claim</p>
             </div>
         </div>
     `
+}
+
+function resetInfo(id) {
+    console.log("test");
+    document.getElementById("claimButton" + id).style.display = "none";
+    document.getElementById("itemCardDetails" + id).style.display = "block";
 }
 
 function claim(id) {
     console.log("Clicked,", id);
     document.getElementById("claimButton" + id).style.display = "block";
     document.getElementById("itemCardDetails" + id).style.display = "none";
+}
+
+function removeInfo(id) {
+    const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // Specify the content type
+        },
+        body: JSON.stringify(data), // Convert the data to JSON format
+      };
+      
+    fetch('/deleteInfo')
+        .then(response => response.json())
+        .catch(error => {
+        console.error('Error:', error);
+        });
 }
 
 // if (item["tags"]["blue"])

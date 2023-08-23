@@ -79,6 +79,12 @@ const payload = {
     "collection": "items"
 }
 
+const headers = {
+  'Content-Type': 'application/ejson',
+  'Accept': 'application/json',
+  'apiKey': '1t2ojJgJtxKAeQ2eAReH81GKV6iejlKUkMPxNQEMhyaeLP3FnOX5PGomIcndciad'
+}
+
 //    'Accept': 'application/json',
 
 const config = {
@@ -125,21 +131,7 @@ function ensureAuthenticated(req, res, next) {
 }
 
 app.get('/admin', ensureAuthenticated, async (req, res) => {
-  // let message = req.session.data.message ? req.session.data.message : '';  // return empty string if undefined
-  let data = await getAllItems();
-  let images = await getImages();
-
-  // optional: check for images
-  if (images === undefined) { 
-    // error occurred in getImages()
-  }
-
-  // console.log(images);
-  for (let x of data.documents) {
-    x["image"] = images[x.id];
-  }
-
-  res.render(__dirname + '/public/admin.html', { data: data });
+  res.render(__dirname + '/public/admin.html');
 });
 
 async function getAllItems() {
@@ -169,6 +161,20 @@ app.post('/login', (req, res) => {
 app.post('/logout', (req, res) => {
   req.session.user = null;
   res.redirect('/');
+})
+
+app.post('/deleteInfo', ensureAuthenticated, (req, res) => {
+  // Make post request to cloud database
+  axios.post('https://data.mongodb-api.com/app/data-lnnyq/endpoint/data/v1/action/deleteOne?id=1111', { headers })
+    .then(response => {
+      console.log(response.data);
+      res.redirect('/admin'); 
+      return 200
+    })
+    .catch(error => {
+      console.error(error);
+    });  
+  
 })
 
 app.post('/upload', ensureAuthenticated, upload.single('image'), (req, res) => {
@@ -210,12 +216,6 @@ app.post('/upload', ensureAuthenticated, upload.single('image'), (req, res) => {
       }
     }
   }
-
-  const headers = {
-    'Content-Type': 'application/ejson',
-    'Accept': 'application/json',
-    'apiKey': '1t2ojJgJtxKAeQ2eAReH81GKV6iejlKUkMPxNQEMhyaeLP3FnOX5PGomIcndciad'
-  }
   
   // Make post request to cloud database
   axios.post('https://data.mongodb-api.com/app/data-lnnyq/endpoint/data/v1/action/insertOne', postData, { headers })
@@ -233,6 +233,26 @@ app.get('/upload', ensureAuthenticated, async function(req, res) {
   res.sendFile(path.join(__dirname + '/public', '/upload.html'));
 });
 
+app.get('/getData', async function(req, res) {
+  // let message = req.session.data.message ? req.session.data.message : '';  // return empty string if undefined
+  let data = await getAllItems();
+  let images = await getImages();
+
+  // optional: check for images
+  if (images === undefined) {
+    // error occurred in getImages()
+  }
+
+  // console.log(images);
+  for (let x of data.documents) {
+    x["image"] = images[x.id];
+  }
+
+  res.json(data);
+  return data;
+});
+
+
 // Home page
 app.get('/', async function(req, res) {
   if (req.session.user) {
@@ -240,22 +260,8 @@ app.get('/', async function(req, res) {
     return;
   } 
 
-  // let message = req.session.data.message ? req.session.data.message : '';  // return empty string if undefined
-  let data = await getAllItems();
-  let images = await getImages();
-
-  // optional: check for images
-  if (images === undefined) { 
-    // error occurred in getImages()
-  }
-
-  // console.log(images);
-  for (let x of data.documents) {
-    x["image"] = images[x.id];
-  }    
-
   // Render template
-  res.render(__dirname + '/public/home.html', { data: data, message: req.session.message })
+  res.render(__dirname + '/public/home.html', { message: req.session.message })
   // res.sendFile(path.join(__dirname + '/public', '/home.html'));
 });
 
