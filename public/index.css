@@ -79,7 +79,6 @@
     margin-left: 1.5vw;
     float: right;
     margin-right: 4vw;
-    
 }
 #customAlert {
     display: none;
@@ -111,7 +110,17 @@
     margin-left: 1.5vw;
     margin-right: 1vw;
     /* margin-top: -6vh; */
-
+}
+#form-box {
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    width: 30vw;
+    height: 80vh;
+    margin: auto;
+    position: absolute;
+    top: 15%;
+    left: 35%;
 }
 
 #add-object-icon {
@@ -206,6 +215,10 @@
     /* border: solid;
     border-color: red;
     border-width: 2px; */
+    flex-wrap: wrap;
+}
+#allItemCardsAdmin {
+    display: flex;
     flex-wrap: wrap;
 }
 

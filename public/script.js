@@ -158,8 +158,8 @@ function processItemCardsAdmin(listOfItems) {
         cardsSection += generateItemCardAdmin(listOfItems[i]);  // returns HTML in string format
     }
 
-    let container = document.getElementById("allItemCards");
-    container.innerHTML = cardsSection;  
+    let container = document.getElementById("allItemCardsAdmin");
+    container.innerHTML = cardsSection;
 }
 
 // Generate a single item card
@@ -191,18 +191,20 @@ function generateItemCardAdmin(itemCardInfo) {
 
     return `
         <div class="itemCard" id="${id}" style="background-image: url(${image})">
-            <div id="itemCardBackground" class="itemCardBackgroundColor" onmouseleave="resetInfo(${id})" onclick="claim(${id})">
-                <div class="itemCardDetails" id="itemCardDetails${id}">
+            <div class="itemCardBackgroundColor">
+                <div class="itemCardDetails">
                     <div class="itemCardDetailsText">ID: ${id}</div>
-                    <div class="itemCardDetailsText">Date Added: ${date}</div>
-                    <div class="itemCardDetailsText">Owner Name: ${name}</div>
+                    <div class="itemCardDetailsText">Date added: ${date}</div>
+                    <div class="itemCardDetailsText">Owner name: ${name}</div>
                 </div>
-                
-                <p class="claimButton" id="claimButton${id}" onclick="removeInfo(${id})>Claim</p>
             </div>
         </div>
     `
 }
+// id="itemCardBackground"
+// id="itemCardDetails${id}"
+/* <p class="claimButton" id="claimButton${id}" onclick="removeInfo(${id})>Claim</p> */
+// onmouseleave="resetInfo(${id})" onclick="claim(${id})
 
 function resetInfo(id) {
     console.log("test");
