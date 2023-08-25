@@ -41,7 +41,7 @@ import axios from 'axios';
 import session from 'express-session';
 import passport from 'passport';
 import { firebaseApp } from './firebase.js';
-import { getStorage, ref, getDownloadURL, listAll, uploadBytes } from "firebase/storage";
+import { getStorage, ref, getDownloadURL, listAll, uploadBytes, deleteObject } from "firebase/storage";
 
 import ejs from 'ejs';
 
@@ -164,12 +164,30 @@ app.post('/logout', (req, res) => {
 })
 
 app.post('/deleteInfo', ensureAuthenticated, (req, res) => {
+  let id = req.query.id
+
+  const postData = {
+    "dataSource": "Cluster0",
+    "database": "Lost-and-found-websi`te",
+    "collection": "items",
+    "filter": {
+      "id": id
+    }
+  }
+
+  // TODO: Make sure this is the right api route
   // Make post request to cloud database
-  axios.post('https://data.mongodb-api.com/app/data-lnnyq/endpoint/data/v1/action/deleteOne?id=1111', { headers })
+  axios.post(`https://data.mongodb-api.com/app/data-lnnyq/endpoint/data/v1/action/deleteOne`, postData, { headers })
     .then(response => {
       console.log(response.data);
+      if (response.status === 200) {
+        deleteImage(id);
+      
+        res.redirect('/admin'); 
+        return 200
+      }
+
       res.redirect('/admin'); 
-      return 200
     })
     .catch(error => {
       console.error(error);
@@ -268,6 +286,29 @@ app.get('/', async function(req, res) {
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}/`)
 })
+
+function deleteImage(name) {
+  const storage = getStorage();
+
+  const listRef = ref(storage, 'images/');  //
+
+  listAll(listRef)
+    .then((res) => {
+      res.items.forEach((itemRef) => {
+        let fileName = itemRef.name; 
+        if (fileName.substring(0, 4) == name) {
+          deleteObject(itemRef).then(() => {
+            console.log("image deleted");
+          }).catch((error) => {
+            console.log(error);
+            // TODO: Restore Firestore data that was deleted if image failed to delete
+          })
+        }
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+}
 
 function postImage(name, fileBytes) {
   const storage = getStorage();

@@ -190,7 +190,6 @@
 .itemCardDetails {
     border-radius: 9px;
     font-size: 6px + 1.3vh;
-    color: white;
     opacity: 0;
 }
 
@@ -208,6 +207,7 @@
 .itemCardDetailsText {
     padding: 6px;
     margin-left: 1vw;
+    color: white;
 }
 
 #allItemCards {

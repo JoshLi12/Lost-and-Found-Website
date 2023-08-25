@@ -191,20 +191,22 @@ function generateItemCardAdmin(itemCardInfo) {
 
     return `
         <div class="itemCard" id="${id}" style="background-image: url(${image})">
-            <div class="itemCardBackgroundColor">
-                <div class="itemCardDetails">
+            <div id="itemCardBackground" class="itemCardBackgroundColor" onmouseleave="resetInfo(${id})" onclick="claim(${id})">
+                <div class="itemCardDetails" id="itemCardDetails${id}">
                     <div class="itemCardDetailsText">ID: ${id}</div>
                     <div class="itemCardDetailsText">Date added: ${date}</div>
                     <div class="itemCardDetailsText">Owner name: ${name}</div>
                 </div>
+                
+                <form action="/deleteInfo?id=${id}" method="post">
+                    <input class="claimButton" id="claimButton${id}" type="submit" value="Claim"></input>
+                </form>
             </div>
         </div>
     `
 }
-// id="itemCardBackground"
-// id="itemCardDetails${id}"
-/* <p class="claimButton" id="claimButton${id}" onclick="removeInfo(${id})>Claim</p> */
-// onmouseleave="resetInfo(${id})" onclick="claim(${id})
+
+// onclick="removeInfo(${id})
 
 function resetInfo(id) {
     console.log("test");
@@ -218,21 +220,22 @@ function claim(id) {
     document.getElementById("itemCardDetails" + id).style.display = "none";
 }
 
-function removeInfo(id) {
-    const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json', // Specify the content type
-        },
-        body: JSON.stringify(data), // Convert the data to JSON format
-      };
+// function removeInfo(id) {
+//     console.log("attempting to remove:", id);
+//     const options = {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json', // Specify the content type
+//         },
+//         body: JSON.stringify(id), // Convert the data to JSON format
+//       };
       
-    fetch('/deleteInfo')
-        .then(response => response.json())
-        .catch(error => {
-        console.error('Error:', error);
-        });
-}
+//     fetch('/deleteInfo', options)
+//         .then(response => response.json())
+//         .catch(error => {
+//         console.error('Error:', error);
+//         });
+// }
 
 // if (item["tags"]["blue"])
 var loginState = false;
