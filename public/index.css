@@ -45,15 +45,19 @@
     border-color: white;
     border-width: 2.3px;
     color: white;
+    background-color: #0F4179;
     display: none;
     text-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
     width: 80%;
     margin: auto;
+    border-radius: 3px;
+    letter-spacing: 1px;
 }
 .claimButton:hover {
-    background-color: red;
+    background-color: #0d3563;
+    transition: 0.2s;
 }
 #login {
     /* position: relative; */
@@ -84,12 +88,11 @@
     display: none;
     position: "absolute";
     top: 0;
-    border-style: solid;
-    border-color: blue;
-    border-width: 3px;
-    background-color: red;
+    font-size: 14px;
+    color: red;
     width: 20vw;
     height: 10vh;
+    margin: 2px;
 }
 #logout-button {
     color: white;
@@ -112,15 +115,58 @@
     /* margin-top: -6vh; */
 }
 #form-box {
-    border-color: black;
-    border-width: 2px;
+    border-color: #004270;
+    border-width: 3.5px;
     border-style: solid;
     width: 30vw;
     height: 80vh;
-    margin: auto;
     position: absolute;
     top: 15%;
     left: 35%;
+    border-radius: 8px;
+}
+#upload-title {
+    color: #004270;
+    text-align: center;
+    width: 10vw;
+    margin: auto;
+    font-size: 25px;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+#upload-forms {
+    width: 14vw;
+    margin: auto;
+    margin-top: 5vh;
+}
+#id-box {
+    margin-bottom: 1vh;
+    height: 3vh;
+    width: 13vw;
+}
+#name-box {
+    margin-bottom: 2vh;
+    height: 3vh;
+    width: 13vw;
+}
+#image-box {
+    margin-bottom: 3vh;
+    
+}
+#submit-information {
+    margin-top: 3vh;
+    width: 13.5vw;
+    height: 2vw;
+    color: white;
+    border-radius: 5px;
+    border-color: #005089;
+    background-color: #005089;
+}
+#submit-information:hover {
+    background-color: white;
+    color: #005a9a;
+    transition: 0.2s;
 }
 
 #add-object-icon {
@@ -172,10 +218,21 @@
     width: 14vw;
     height: 14vw;
     border-radius: 9px;
-    background-image: url("./img/shorthair.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     margin: 2.8vw;
+}
+
+#itemCardDisplay {
+    width: 14vw;
+    height: 14vw;
+    border-radius: 9px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    margin: auto;
 }
 
 .itemCard:hover .itemCardBackgroundColor{

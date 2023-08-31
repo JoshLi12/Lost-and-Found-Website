@@ -153,7 +153,7 @@ app.post('/login', (req, res) => {
     req.session.user = "Admin";
     res.redirect('/admin');  // TODO: redirect to admin page
   } else {
-    req.session.message = "Invalid Login";
+    req.session.message = "*Invalid Login";
     res.redirect('/');  // redirect to home
   }
 })

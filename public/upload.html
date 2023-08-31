@@ -34,8 +34,12 @@
     
     <main id="main">
       <div id="form-box">
-        <h1>Upload Item</h1>
-        <form action="/upload" method="post" enctype="multipart/form-data">
+        <h1 id="upload-title">Upload Item</h1>
+        <div id="itemCardDisplay">
+
+        </div>
+        
+        <form id="upload-forms" action="/upload" method="post" enctype="multipart/form-data">
             <div>
                 <input type="text" name="idBox" id="id-box" placeholder="Item ID">
             </div>
@@ -43,7 +47,7 @@
                 <input type="text" name="nameBox" id="name-box" placeholder="Name on item (n/a if none)">
             </div>
             <div>
-                <input type="file" name="image" id="image">
+                <input type="file" name="image" id="image-box">
             </div>
             <div>
                 <input id="submit-information" type="submit" value="Upload">
@@ -51,5 +55,28 @@
         </form>
       </div>
     </main>
+
+    <script>
+      const uploadForm = document.getElementById('upload-forms');
+      const imageContainer = document.getElementById('itemCardDisplay');
+      const fileInput = document.getElementById('image-box'); // const fileInput = uploadForm.querySelector('input[type="file"]');
+    
+      fileInput.addEventListener('change', () => {
+        const selectedFile = fileInput.files[0];
+        if (selectedFile) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const imgElement = document.createElement('img');
+            imgElement.src = event.target.result;
+            imgElement.style.maxWidth = '100%';
+            imageContainer.innerHTML = '';
+            imgElement.style["object-fit"] = "fill";
+            imgElement.style["border-radius"] = "9px";
+            imageContainer.appendChild(imgElement);
+          };
+          reader.readAsDataURL(selectedFile);
+        }
+      });
+    </script>
   </body>
 </html>

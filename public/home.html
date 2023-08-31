@@ -30,12 +30,13 @@
             <form id="loginForm" action="/login" method="post" >
               <input id="enter-password-box" name="enterPassword" placeholder="Enter password...">
               <input id="enter-password-button" type="submit" value="Log in"></input>
+              <div id="customAlert">
+                <%= message %>
+              </div>
             </form>
+
           </div>
         </li>
-        <div id="customAlert">
-          <%= message %>
-        </div>
       </ul>
 
       
