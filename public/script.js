@@ -192,15 +192,15 @@ function generateItemCardAdmin(itemCardInfo) {
     return `
         <div class="itemCard" id="${id}" style="background-image: url(${image})">
             <div id="itemCardBackground" class="itemCardBackgroundColor" onmouseleave="resetInfo(${id})" onclick="claim(${id})">
+                <form action="/deleteInfo?id=${id}" method="post">
+                    <input class="claimButton" id="claimButton${id}" type="submit" value="Claim"></input>
+                </form>    
+                
                 <div class="itemCardDetails" id="itemCardDetails${id}">
                     <div class="itemCardDetailsText">ID: ${id}</div>
                     <div class="itemCardDetailsText">Date added: ${date}</div>
                     <div class="itemCardDetailsText">Owner name: ${name}</div>
                 </div>
-                
-                <form action="/deleteInfo?id=${id}" method="post">
-                    <input class="claimButton" id="claimButton${id}" type="submit" value="Claim"></input>
-                </form>
             </div>
         </div>
     `
@@ -218,6 +218,8 @@ function claim(id) {
     console.log("Clicked,", id);
     document.getElementById("claimButton" + id).style.display = "block";
     document.getElementById("itemCardDetails" + id).style.display = "none";
+    document.getElementById("itemCardBackgroundColor").style.opacity = "0.83";
+    
 }
 
 // function removeInfo(id) {
