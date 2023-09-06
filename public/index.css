@@ -33,6 +33,11 @@
 #appleby-logo-white {
     width: 6.5vw;
     height: auto;
+    margin-top: 0.5vh;
+    user-select: none; 
+    -moz-user-select: none; 
+    -webkit-text-select: none;
+    -webkit-user-select: none;
 }
 .nav-bar-buttons {
     margin-left: 1.5vw;
@@ -62,6 +67,7 @@
 #login {
     /* position: relative; */
     margin-left: 1.5vw;
+    margin-top: -1vh;
     float: right;
     display: inline;
     margin-right: 4vw;
@@ -86,12 +92,10 @@
 }
 #customAlert {
     display: none;
-    position: "absolute";
-    top: 0;
+    /* position: "absolute"; */
+    /* top: 0; */
     font-size: 14px;
     color: red;
-    width: 20vw;
-    height: 10vh;
     margin: 2px;
 }
 #logout-button {
@@ -105,12 +109,14 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    margin-top: -0.7vh;
 }
 
 #pop-up-login {
     display: none;
     float: right;
     margin-left: 1.5vw;
+    margin-top: -1vh;
     margin-right: 1vw;
     /* margin-top: -6vh; */
 }
@@ -130,9 +136,23 @@
     text-align: center;
     width: 10vw;
     margin: auto;
-    font-size: 25px;
+    font-size: 30px;
     margin-top: 5vh;
     margin-bottom: 5vh;
+}
+#title {
+    display: inline;
+}
+
+#title-text {
+    color: white;
+    position: relative;
+    font-size: 30px;
+    bottom: 3.5vh;
+    user-select: none; 
+    -moz-user-select: none; 
+    -webkit-text-select: none;
+    -webkit-user-select: none;
 }
 
 #upload-forms {
@@ -152,6 +172,9 @@
 }
 #image-box {
     margin-bottom: 3vh;
+    /* border: none;
+    background-color: blue;
+    padding: 20px; */
     
 }
 #submit-information {
@@ -173,7 +196,7 @@
     font-size: 45px;
     float: right;
     display: inline;
-    margin-top: -1vh;
+    margin-top: -1.6vh;
 
 }
 #nav-bar-right {
@@ -221,6 +244,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     margin: 2.8vw;
+    background-position: center;
 }
 
 #itemCardDisplay {
@@ -233,6 +257,7 @@
     border-color: black;
     border-style: solid;
     margin: auto;
+    overflow-y: hidden;
 }
 
 .itemCard:hover .itemCardBackgroundColor{
@@ -299,6 +324,60 @@
         width: 37vw;
         height: 37vw;
         margin: 6.5vw;
+    }
+    #appleby-logo-white {
+        width: 12vh;
+        margin-top: 1vh;
+        
+    }
+    #title-text {
+        display: none;
+    }
+    #login {
+        margin-top: 0.3vh;
+    }
+    #enter-password-box {
+        width: 15vh;
+        height: 2.3vh;
+        margin-top: 1vh;
+    }
+    #enter-password-button {
+        width: 7vh;
+        height: 2.7vh;
+        margin-top: 1vh;
+    }
+    #add-object-icon {
+        margin-top: -0.9vh;
+    }
+    #logout {
+        margin-top: 0.5vh;
+    }
+    #form-box {
+        width: 82vw;
+        left: 9%;
+    }
+    #upload-title {
+        font-size: 30px;
+        width: 50vw;
+    }
+    #itemCardDisplay {
+        width: 37vw;
+        height: 37vw;
+    }
+    #upload-forms {
+        width: 37vw;
+    }
+    #id-box {
+        width: 36vw;
+        height: 6vw;
+    }
+    #name-box {
+        width: 36vw;
+        height: 6vw;
+    }
+    #submit-information {
+        width: 36vw;
+        height: 4vh;
     }
 
     

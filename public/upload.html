@@ -15,9 +15,17 @@
   <body>
     <header>
       <ul id="nav-bar-admin">
-        <li>
-          <a href="/admin">
+        <li style="display: inline">
+          <a href="/admin" style="text-decoration: none;">
             <img id="appleby-logo-white" src="./img/appleby-logo-whitet.png">
+          </a>
+        </li>
+
+        <li id="title">
+          <a href="/admin" style="text-decoration: none;">
+            <span id="title-text">
+              Lost and Found
+            </span>
           </a>
         </li>
         
@@ -27,6 +35,7 @@
               <input id="logout-button" type="submit" value="Log out"></input>
             </form>
           </div>
+  
         </li>
         
       </ul>
@@ -41,13 +50,13 @@
         
         <form id="upload-forms" action="/upload" method="post" enctype="multipart/form-data">
             <div>
-                <input type="text" name="idBox" id="id-box" placeholder="Item ID">
+                <input type="text" name="idBox" id="id-box" required placeholder="Item ID">
             </div>
             <div>
-                <input type="text" name="nameBox" id="name-box" placeholder="Name on item (n/a if none)">
+                <input type="text" name="nameBox" id="name-box" required placeholder="Name on item">
             </div>
             <div>
-                <input type="file" name="image" id="image-box">
+                <input type="file" name="image" id="image-box" required >
             </div>
             <div>
                 <input id="submit-information" type="submit" value="Upload">
@@ -72,6 +81,7 @@
             imageContainer.innerHTML = '';
             imgElement.style["object-fit"] = "fill";
             imgElement.style["border-radius"] = "9px";
+            imgElement.style["margin-top"] = "-15%";
             imageContainer.appendChild(imgElement);
           };
           reader.readAsDataURL(selectedFile);
