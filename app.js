@@ -258,7 +258,8 @@ app.get('/getData', async function(req, res) {
 
   // optional: check for images
   if (images === undefined) {
-    // error occurred in getImages()
+    res.json(400)
+    return;
   }
 
   // console.log(images);
