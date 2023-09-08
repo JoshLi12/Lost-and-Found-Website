@@ -255,22 +255,27 @@ app.get('/upload', ensureAuthenticated, async function(req, res) {
 
 app.get('/getData', async function(req, res) {
   // let message = req.session.data.message ? req.session.data.message : '';  // return empty string if undefined
-  let data = await getAllItems();
-  let images = await getImages();
+  try {
+    let data = await getAllItems();
+    let images = await getImages();
 
-  // optional: check for images
-  if (images === undefined) {
-    res.status(400).json({error: 'No images found'})
-    return;
+    // optional: check for images
+    // if (images === undefined) {
+    //   res.status(400).json({error: 'No images found'})
+    //   return;
+    // }
+    // console.log(images);
+    
+    for (let x of data.documents) {
+      x["image"] = images[x.id];
+    }
+
+    res.json(data);
+    return data;
+  } catch(e) {
+    console.log(e);
+    return res.status(400).json({error: e.message});
   }
-
-  // console.log(images);
-  for (let x of data.documents) {
-    x["image"] = images[x.id];
-  }
-
-  res.json(data);
-  return data;
 });
 
 
