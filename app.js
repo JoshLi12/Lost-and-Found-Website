@@ -42,6 +42,7 @@ import session from 'express-session';
 import passport from 'passport';
 import { firebaseApp } from './firebase.js';
 import { getStorage, ref, getDownloadURL, listAll, uploadBytes, deleteObject } from "firebase/storage";
+import fetch from 'node-fetch';
 
 import ejs from 'ejs';
 
@@ -142,6 +143,7 @@ async function getAllItems() {
     return jsonData;
   } catch(e) {
     console.log(e)
+    return;  // return undefined
   }
 }
 
@@ -258,7 +260,7 @@ app.get('/getData', async function(req, res) {
 
   // optional: check for images
   if (images === undefined) {
-    res.json(400)
+    res.status(400).json({error: 'No images found'})
     return;
   }
 
