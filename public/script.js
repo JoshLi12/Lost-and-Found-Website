@@ -191,7 +191,7 @@ function generateItemCardAdmin(itemCardInfo) {
 
     return `
         <div class="itemCard" id="${id}" style="background-image: url(${image})">
-            <div id="itemCardBackground" class="itemCardBackgroundColor" onmouseleave="resetInfo(${id})" onclick="claim(${id})">
+            <div id="itemCardBackgroundColor${id}" class="itemCardBackgroundColor" onmouseout="resetInfo(${id})" onclick="claim(${id})">
                 <form action="/deleteInfo?id=${id}" method="post">
                     <input class="claimButton" id="claimButton${id}" type="submit" value="Claim"></input>
                 </form>    
@@ -212,7 +212,7 @@ function resetInfo(id) {
     console.log("test");
     document.getElementById("claimButton" + id).style.display = "none";
     document.getElementById("itemCardDetails" + id).style.display = "block";
-    document.getElementsByClassName("itemCardBackgroundColor")[0].style.backgroundColor = "transparent";
+    document.getElementById("itemCardBackgroundColor" + id).style.backgroundColor = "transparent";
 
 }
 
@@ -220,7 +220,7 @@ function claim(id) {
     console.log("Clicked,", id);
     document.getElementById("claimButton" + id).style.display = "block";
     document.getElementById("itemCardDetails" + id).style.display = "none";
-    document.getElementsByClassName("itemCardBackgroundColor")[0].style.backgroundColor = "#0F4179";
+    document.getElementById("itemCardBackgroundColor" + id).style.backgroundColor = "#0F4179";
     
 }
 
