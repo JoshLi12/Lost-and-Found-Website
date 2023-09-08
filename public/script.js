@@ -212,13 +212,15 @@ function resetInfo(id) {
     console.log("test");
     document.getElementById("claimButton" + id).style.display = "none";
     document.getElementById("itemCardDetails" + id).style.display = "block";
+    document.getElementsByClassName("itemCardBackgroundColor")[0].style.backgroundColor = "transparent";
+
 }
 
 function claim(id) {
     console.log("Clicked,", id);
     document.getElementById("claimButton" + id).style.display = "block";
     document.getElementById("itemCardDetails" + id).style.display = "none";
-    document.getElementById("itemCardBackgroundColor").style.opacity = "0.83";
+    document.getElementsByClassName("itemCardBackgroundColor")[0].style.backgroundColor = "#0F4179";
     
 }
 
