@@ -95,7 +95,7 @@
     /* position: "absolute"; */
     /* top: 0; */
     font-size: 14px;
-    color: red;
+    color: rgb(255, 26, 26);
     margin: 2px;
 }
 #logout-button {
@@ -340,7 +340,7 @@
     .itemCardDetails {
        font-size: 10px;
        opacity: 1;
-       margin-top: 25vh;
+       margin-top: 27vh;
     }
 
     .itemCardBackgroundColor {
@@ -367,6 +367,9 @@
     .itemCardBackgroundColorNormal:hover {
         background-color: transparent;
         color: #0F4179;
+    }
+    #enter-password-button {
+        border-radius: 2px;
     }
 
     .itemCardDetailsText {
@@ -400,6 +403,7 @@
         width: 7vh;
         height: 2.7vh;
         margin-top: 1vh;
+        padding-right: 3px;
     }
     #add-object-icon {
         margin-top: -0.9vh;
