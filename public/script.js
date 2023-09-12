@@ -171,7 +171,7 @@ function generateItemCard(itemCardInfo) {
 
     return `
         <div class="itemCard" id="${id}" style="background-image: url(${image})">
-            <div class="itemCardBackgroundColor">
+            <div class="itemCardBackgroundColorNormal">
                 <div class="itemCardDetails">
                     <div class="itemCardDetailsText">ID: ${id}</div>
                     <div class="itemCardDetailsText">Date added: ${date}</div>
