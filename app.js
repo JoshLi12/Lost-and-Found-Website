@@ -121,6 +121,7 @@ var day = date.getDate();
 var year = date.getFullYear();
 var todayDate = monthConversion.get(month+1) + " " + day + ", " + year;
 
+
 function ensureAuthenticated(req, res, next) {
   if (req.session.user) {
     console.log("User authenticated");
